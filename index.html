@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Drive API Quickstart 11</p>
+    <p>Drive API Quickstart 12</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
@@ -153,7 +153,12 @@
             },
           });
           console.log({response})
-          const downloadUrl = response.result.downloadUrl;
+
+          const text = await response.text();
+          console.log({text})
+
+          const blob = new Blob([text], {type: 'text/plain'});
+          const downloadUrl = window.URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.href = downloadUrl;
           link.download = fileId;
