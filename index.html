@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Drive API Quickstart 7</p>
+    <p>Drive API Quickstart 8</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
@@ -163,13 +163,11 @@
         var fileContent = 'sample text'; // As a sample, upload a text file.
         var file = new Blob([fileContent], {type: 'text/plain'});
 
-        const fileMetadata = {
-          'name': 'hello.txt',
-        };
         const media = {
           mimeType: 'text/plain',
-          body: text
+          name: 'hello.txt',
         };
+
         try {
           const response = await gapi.client.drive.files.create({
             metadata: new Blob([JSON.stringify(media)], {type: 'application/json'}),
