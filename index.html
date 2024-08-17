@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Drive API Quickstart 4</p>
+    <p>Drive API Quickstart 5</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
@@ -154,6 +154,27 @@
           link.href = downloadUrl;
           link.download = fileId;
           link.click();
+        } catch (err) {
+          document.getElementById('content').innerText = err.message;
+        }
+      }
+
+      async function createFile() {
+        const text = 'example text';
+        const fileMetadata = {
+          'name': 'hello.txt',
+        };
+        const media = {
+          mimeType: 'text/plain',
+          body: text
+        };
+        try {
+          const response = await gapi.client.drive.files.create({
+            resource: fileMetadata,
+            media: media,
+            fields: 'id'
+          });
+          document.getElementById('content').innerText = 'File ID: ' + response.result.id;
         } catch (err) {
           document.getElementById('content').innerText = err.message;
         }
