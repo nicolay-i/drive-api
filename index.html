@@ -137,9 +137,26 @@
         }
         // Flatten to string to display
         const output = files.reduce(
-            (str, file) => `${str}${file.name} (${file.id})\n`,
+            (str, file) => `<div onclick="handleDownloadClick(file.id)">${str}${file.name} (${file.id})\n</div>`,
             'Files:\n');
-        document.getElementById('content').innerText = output;
+        document.getElementById('content').innerHTML = output;
+      }
+
+      async function handleDownloadClick(fileId) {
+        // const fileId = document.getElementById('fileId').value;
+        try {
+          const response = await gapi.client.drive.files.get({
+            fileId: fileId,
+            alt: 'media',
+          });
+          const downloadUrl = response.result.downloadUrl;
+          const link = document.createElement('a');
+          link.href = downloadUrl;
+          link.download = fileId;
+          link.click();
+        } catch (err) {
+          document.getElementById('content').innerText = err.message;
+        }
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
