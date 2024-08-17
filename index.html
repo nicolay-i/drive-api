@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Drive API Quickstart 2</p>
+    <p>Drive API Quickstart 3</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
@@ -137,7 +137,7 @@
         }
         // Flatten to string to display
         const output = files.reduce(
-            (str, file) => `<div onclick="handleDownloadClick(file.id)">${str}${file.name} (${file.id})\n</div>`,
+            (str, file) => `<div data-id="${file.id}" onclick="handleDownloadClick(${file.id})">${str}${file.name} (${file.id})\n</div>`,
             'Files:\n');
         document.getElementById('content').innerHTML = output;
       }
