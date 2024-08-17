@@ -137,7 +137,7 @@
         }
         // Flatten to string to display
         const output = files.reduce(
-            (str, file) => `<div data-id="${file.id}" onclick="handleDownloadClick(${file.id})">${str}${file.name} (${file.id})\n</div>`,
+            (str, file) => `<div data-id="${file.id}" onclick="handleDownloadClick('${file.id}')">${str}${file.name} (${file.id})\n</div>`,
             'Files:\n');
         document.getElementById('content').innerHTML = output;
       }
