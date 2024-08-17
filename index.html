@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Drive API Quickstart 10</p>
+    <p>Drive API Quickstart 11</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
@@ -138,7 +138,7 @@
         }
         // Flatten to string to display
         const output = files.reduce(
-            (str, file) => `<div data-id="${file.id}" onclick="handleDownloadClick('${file.id}')">${str}${file.name} (${file.id})\n</div>`,
+            (str, file) => `<div>${str}${file.name} (${file.id})\n <button onclick="handleDownloadClick('${file.id}')">Download</button></div>`,
             'Files:\n');
         document.getElementById('content').innerHTML = output;
       }
@@ -152,6 +152,7 @@
               Authorization: `Bearer ${gapi.auth.getToken().access_token}`,
             },
           });
+          console.log({response})
           const downloadUrl = response.result.downloadUrl;
           const link = document.createElement('a');
           link.href = downloadUrl;
